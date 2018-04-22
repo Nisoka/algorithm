@@ -1,5 +1,5 @@
-#include "common/common_int.h"
-using namespace nan_int;
+#include "../common/common_data.h"
+
 void merge_array(int a[], int aux[], int l, int m, int r){
   int i, j, k;
   i = 0;
@@ -47,6 +47,7 @@ void merge_array(int a[], int aux[], int l, int m, int r){
 
 void merge_sort(int a[], int aux[], int l, int r){
   int m = (l + r)/2;
+
   if(l >= r)
     return ;
 
@@ -63,7 +64,7 @@ void merge_sort(int a[], int aux[], int l, int r){
 
 
 
-int merge_sort_main(int argc, char* argv[]){
+int main(int argc, char* argv[]){
   int len = 0;
   if(argc == 2){
     len = atoi(argv[1]);

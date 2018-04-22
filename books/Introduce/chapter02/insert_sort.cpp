@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../common/common_data.h"
+#include "common/common_int.h"
 
 using namespace std;
-
+using namespace nan_int;
 void insertion_sort(int a[], int length){
   int i, j, key;
   i = 1;
@@ -22,12 +22,13 @@ void insertion_sort(int a[], int length){
   print_array_int(a, length);
 }
 
-int main(int argc, char* argv[]){
+int insert_sort_main(){
 
   int a[100] = {};
   int length = 10;
   generate_array_int(a, length);
   insertion_sort(a, length);
+  return 0;
 }
 
 
