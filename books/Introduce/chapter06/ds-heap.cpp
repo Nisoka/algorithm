@@ -11,9 +11,11 @@ Heap<KeyType, DataType>::Heap()
 template<class KeyType, class DataType>
 void Heap<KeyType, DataType>::Insert(DataItem<KeyType, DataType> item)
 {
-    heap_size_ += 1;
+
     dataManager.Insert(heap_size_, item);
+    heap_size_ += 1;
     ShiftUp(heap_size_-1);
+
 }
 
 
@@ -90,9 +92,10 @@ bool Heap<KeyType, DataType>::ShiftUp(int index)
         ret = true;
 
     int index_parent = HEAP_PARENT(index);
-    while(index > 0 && dataManager.Bigger(index_parent, index)){
-        dataManager.Exchange(index_parent, index);
+    while(index > 0 && dataManager.Bigger(index, index_parent)){
+        dataManager.Exchange(index, index_parent);
         index = index_parent;
+        index_parent = HEAP_PARENT(index);
     }
 
     return ret;

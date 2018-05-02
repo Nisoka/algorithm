@@ -28,16 +28,16 @@ private:
 };
 
 
-class PriorityQueue : public HeapSort
-{
-public:
-    PriorityQueue();
+//class PriorityQueue : public HeapSort
+//{
+//public:
+//    PriorityQueue();
 
-    void INSERT(int *heap_array, int element);
-    void MAXIMUM(int *heap_array);
-    void EXTRACT_MAX(int *heap_array);
-    void INCREASE_KEY(int *heap_array, int element, int new_value);
+//    void INSERT(int *heap_array, int element);
+//    void MAXIMUM(int *heap_array);
+//    void EXTRACT_MAX(int *heap_array);
+//    void INCREASE_KEY(int *heap_array, int element, int new_value);
 
-};
+//};
 
 #endif // HEAPSORT_H

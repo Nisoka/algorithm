@@ -36,3 +36,24 @@ bool PriorityQueue<KeyType, DataType>::IncreaseKey(KeyType oldkey, KeyType newke
     }
 
 }
+
+template<class KeyType, class DataType>
+void PriorityQueue<KeyType, DataType>::Debug_TestFunc()
+{
+    ds_heap_.Debug_BuildHeap(10);
+    DataItem<KeyType, DataType> item;
+    GetMaxItem(item);
+    item.Print();
+    cout << endl;
+
+    IncreaseKey(5, 11);
+    ds_heap_.PrintHeapData();
+
+    ExtractMax(item);
+    ds_heap_.PrintHeapData();
+
+    item.Print();
+    cout << endl;
+    ds_heap_.PrintHeapData();
+}
+

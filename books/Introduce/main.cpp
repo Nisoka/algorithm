@@ -1,10 +1,14 @@
 #include <iostream>
 #include "common/common_int.h"
+#include "common/base_types.h"
+#include "common/datamanager.h"
 #include "chapter04/sub_array.h"
 #include "chapter06/heapsort.h"
 #include "chapter06/ds-heap.cpp"
-#include "common/base_types.h"
-#include "common/datamanager.cpp"
+#include "chapter06/ds-pri-queue.cpp"
+#include "chapter07/sort-quick.h"
+
+
 using namespace std;
 using namespace nan_int;
 
@@ -35,8 +39,11 @@ int main()
     nanDebug::isDebuging = true;
 
 
-    Heap<nint, nint> ds_heap;
-    ds_heap.Debug_TestFunc();
+    sort_quick quick;
+    quick.DebugQuickSort();
+
+
+
 
     return 0;
 }

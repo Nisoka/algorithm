@@ -14,7 +14,9 @@ SOURCES += main.cpp \
     chapter06/ds-heap.cpp \
     common/base_types.cpp \
     common/nan_debug.cpp \
-    chapter06/ds-pri-queue.cpp
+    chapter06/ds-pri-queue.cpp \
+    common/common.cpp \
+    chapter07/sort-quick.cpp
 
 HEADERS += \
     common/common.h \
@@ -27,4 +29,6 @@ HEADERS += \
     common/base_types.h \
     common/nan_debug.h \
     chapter06/common_heap.h \
-    chapter06/ds-pri-queue.h
+    chapter06/ds-pri-queue.h \
+    sort-quick.h \
+    chapter07/sort-quick.h

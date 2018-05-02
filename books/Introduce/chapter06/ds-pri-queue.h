@@ -18,8 +18,12 @@ public:
 
 
 
-    DataItem<KeyType, DataType> GetMaximum();
+//    DataItem<KeyType, DataType> GetMaximum();
 
+
+public:
+    // For Debug
+    void Debug_TestFunc();
 
 
 private:
