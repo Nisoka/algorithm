@@ -15,7 +15,6 @@ void Heap<KeyType, DataType>::Insert(DataItem<KeyType, DataType> item)
     dataManager.Insert(heap_size_, item);
     heap_size_ += 1;
     ShiftUp(heap_size_-1);
-
 }
 
 

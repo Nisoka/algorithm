@@ -21,7 +21,7 @@ void generate_array_int_for_debug(int a[], int length){
 void generate_array_int(int a[], int length){
   int i;
   i = 0;
-  srand(time(NULL));
+  srand(time(nullptr));
   for(i = 0; i < length ; i ++){
     a[i] = random_int();
   }
@@ -31,7 +31,7 @@ void generate_array_int(int a[], int length){
 
 void generate_vec_int(vector<int> *a, int length){
     int i = 0;
-    srand(int(time(NULL)));
+    srand(int(time(nullptr)));
     a->resize(length);
     vector<int>::iterator iter = a->begin(), end = a->end();
 

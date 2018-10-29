@@ -65,7 +65,7 @@ public:
 
     //Vector
     DataItem<KeyType, DataType> GetItem(int i);
-    DataItem<KeyType, DataType> ExtractItem(int i);
+    DataItem<KeyType, DataType> ExtractItem(int pos);
     void Insert(int pos, DataItem<KeyType, DataType> item);
     void Append(DataItem<KeyType, DataType> item);
     int GetVecLength(){return item_vec_.size();}
@@ -102,11 +102,6 @@ public:
     DataItem<KeyType, DataType> **item_matrix_;
     int matrix_len_;
 };
-
-
-
-
-#include "datamanager.h"
 
 
 
@@ -193,8 +188,6 @@ void DataManager<KeyType, DataType>::PrintDataItemArray()
     }
 }
 
-////////////////////////////////////////////////// Vector //////////////////////////////////////////////////
-
 template<class KeyType, class DataType>
 DataItem<KeyType, DataType> DataManager<KeyType, DataType>::GetItem(int i)
 {
@@ -202,11 +195,11 @@ DataItem<KeyType, DataType> DataManager<KeyType, DataType>::GetItem(int i)
 }
 
 template<class KeyType, class DataType>
-DataItem<KeyType, DataType> DataManager<KeyType, DataType>::ExtractItem(int i)
+DataItem<KeyType, DataType> DataManager<KeyType, DataType>::ExtractItem(int pos)
 {
     //直接使用 item_vec_.erase(iter) 方法出错, 具体原因不明, 像是库本身问题.
-    typename vector<DataItem<KeyType, DataType>>::iterator iter = item_vec_.begin()+i;
-    DataItem<KeyType, DataType> item = item_vec_[i];
+    typename vector<DataItem<KeyType, DataType>>::iterator iter = item_vec_.begin()+pos;
+    DataItem<KeyType, DataType> item = item_vec_[pos];
 
     for(; iter + 1 < item_vec_.end(); iter++){
         *iter = *(iter+1);
@@ -261,16 +254,14 @@ void DataManager<KeyType, DataType>::Exchange(int indexi, int indexj)
 
 
 
-
-
+// pos: is the target postion. eg:0 -- 9
 template<class KeyType, class DataType>
 void DataManager<KeyType, DataType>::Insert(int pos, DataItem<KeyType, DataType> item)
 {
     assert(_data_save_as_type == eDataSaveAsVector);
     typename vector<DataItem<KeyType, DataType>>::iterator
-            iter_cur = item_vec_.end(),
+            iter_cur = item_vec_.end()-1,                       //vector.end() is not the last value, but the end()-1 is .
             iter_target = item_vec_.begin() + pos;
-
 
     //直接使用 item_vec_.insert(iter, item) 方法出错, 具体原因不明, 像是库本身问题.
     item_vec_.resize(item_vec_.size() + 1);
@@ -302,15 +293,14 @@ void DataManager<KeyType, DataType>::CleanDataItemVector()
     item_vec_.resize(0);
 }
 
+// vector.begin() is the first value
+// vector.end() is not the last value,  but the last+1 value.
 template<class KeyType, class DataType>
 void DataManager<KeyType, DataType>::PrintDataItemVector(int size)
 {
-    int len = size;
-    if(len == 0)
-        len = item_vec_.size();
-
-    for(int i = 0; i < len; i++){
-        item_vec_[i].Print();
+    typename vector<DataItem<KeyType, DataType>>::iterator iter;
+    for (iter = item_vec_.begin(); iter != item_vec_.end(); iter++){
+        (*iter).Print();
         printf(" ");
     }
     printf("\n");
@@ -319,12 +309,12 @@ void DataManager<KeyType, DataType>::PrintDataItemVector(int size)
 template<class KeyType, class DataType>
 int DataManager<KeyType, DataType>::GetIndexOfKey(KeyType key)
 {
-    typename vector<DataItem<KeyType, DataType>>::iterator
-            iter = item_vec_.begin(),
-            end = item_vec_.end();
+    typename vector<DataItem<KeyType, DataType>>::iterator iter;
+
     int i = 0;
-    for(; iter != end; iter++, i++){
-        if(iter->key.GetValue() == key.GetValue()){
+    for (iter = item_vec_.begin(); iter != item_vec_.end(); iter++){
+        i++;
+        if (iter->key.GetValue() == key.GetValue()){
             return i;
         }
     }
@@ -339,26 +329,25 @@ void DataManager<KeyType, DataType>::SetIndexKey(int index, KeyType newKey)
 template<class KeyType, class DataType>
 void DataManager<KeyType, DataType>::DebugTest()
 {
+    printf("Test Generate! \n");
     GenDataItemVector(10);
-    printf("Generate! \n");
     PrintDataItemVector();
 
-    printf("ExtractItem! \n");
+    printf("Test ExtractItem! \n");
     DataItem<KeyType, DataType> item = ExtractItem(3);
     PrintDataItemVector();
 
-
-    printf("Instert, Append! \n");
-    Insert(5, item);
+    printf("Test Instert, Append! \n");
+    Insert(9, item);
     Append(item);
     PrintDataItemVector();
-
-
     printf("Cur length is 11, true is %d \n", GetVecLength());
 
-    printf("GetIndexOf, SetIndexKey! \n");
+
+    printf("Test GetIndexOf, SetIndexKey! \n");
+    int key = 7;
     int index = GetIndexOfKey(7);
-    printf(" ------- index %d \n", index);
+    printf(" key %d Item's index is %d \n", key, index);
     SetIndexKey(index, 17);
 
     PrintDataItemVector();

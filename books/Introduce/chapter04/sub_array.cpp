@@ -23,17 +23,17 @@ sub_array::sub_array()
 
 struct SSubArrayInfo sub_array::find_max_cross_subarray(vector<int> *vec_data, int low, int mid, int high)
 {
-    int left_sum = -MAX_INT;
-    int right_sum = -MAX_INT;
-    int res_left = 0;
-    int res_right = 0;
+    int left_sum = -SENTINEL_INT;
+    int right_sum = -SENTINEL_INT;
+    int start = 0;
+    int end = 0;
     int sum = 0;
     int i = 0;
     for(i = mid; i >= low; i--){
         sum += (*vec_data)[i];
         if(sum > left_sum){
             left_sum = sum;
-            res_left = i;
+            start = i;
         }
     }
 
@@ -42,11 +42,11 @@ struct SSubArrayInfo sub_array::find_max_cross_subarray(vector<int> *vec_data, i
         sum += (*vec_data)[i];
         if(sum > right_sum){
             right_sum = sum;
-            res_right = i;
+            end = i;
         }
     }
 
-    return SSubArrayInfo(res_left, res_right, (left_sum+right_sum));
+    return SSubArrayInfo(start, end, (left_sum+right_sum));
 }
 
 SSubArrayInfo sub_array::find_maximum_subarray(vector<int> *vec_data, int low, int high)
@@ -57,6 +57,8 @@ SSubArrayInfo sub_array::find_maximum_subarray(vector<int> *vec_data, int low, i
         return SSubArrayInfo(low, high, (*vec_data)[low]);
     }
     else{
+        //mid - left_end_pos;
+        //mid+1 - right_start_pos;
         int mid = (low + high)/2;
         left_res = find_maximum_subarray(vec_data, low, mid);
         right_res = find_maximum_subarray(vec_data, mid+1, high);
@@ -94,9 +96,6 @@ SSubArrayInfo sub_array::find_maximum_subarray_brute_force_attach(vector<int> *v
 
 
     return SSubArrayInfo(res_start, res_end, maxium_value);
-
-
-
 }
 
 

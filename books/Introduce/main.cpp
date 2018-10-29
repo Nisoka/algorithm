@@ -38,9 +38,20 @@ int main()
 {
     nanDebug::isDebuging = true;
 
+    //dataManager Test
+    DataManager<nint, nint> dataManager;
+    dataManager.DebugTest();
 
-    sort_quick quick;
-    quick.DebugQuickSort();
+
+    // PriorityQueue Test
+//    PriorityQueue<nint, nint> priQue;
+//    priQue.Debug_TestFunc();
+
+//    sort_quick quick;
+//    quick.DebugQuickSort();
+
+
+
 
 
 
